@@ -1,0 +1,21 @@
+<div>
+  <h1>Random United!</h1>
+</div>
+<button type="button" (click)="generateAvailableLists()">Reroll</button>
+<div *ngIf="chosenVillain" style="margin: 10px 0;">
+  <span style="font-weight: bold">Villain:</span><br/>
+  {{ chosenVillain.name }}
+</div>
+<div *ngIf="chosenHeroes">
+  <span style="font-weight: bold">Heroes:</span>
+  <div style="display: flex;">
+    <div *ngFor="let hero of chosenHeroes; let index = index" style="margin: 5px; padding: 5px; border: 1px solid dimgray">
+      <div style="text-align: center">
+        Player {{index + 1}}:
+      </div>
+      <div style="text-align: center">
+        {{ hero.name }}
+      </div>
+    </div>
+  </div>
+</div>
