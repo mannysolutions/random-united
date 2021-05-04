@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ICharacter } from '../models/general.model';
 import { GameList } from '../data/game.data';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +21,15 @@ export class AppComponent implements OnInit{
   private availableVillains: ICharacter[];
 
   constructor(
+    public swUpdate: SwUpdate,
     private modalService: NgbModal
-  ){}
+  ){
+    swUpdate.available.subscribe((event) => {
+      if (confirm('New app version available')) {
+        location.reload();
+      }
+    });
+  }
 
   public ngOnInit(): void {
     this.generateAvailableLists()
