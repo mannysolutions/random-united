@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICharacter } from '../models/general.model';
 import { GameList } from '../data/game.data';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,6 @@ export class AppComponent implements OnInit{
   title = 'random-united';
 
   public gameList = GameList;
-  public filter = {};
 
   public chosenVillain: ICharacter = null;
   public chosenHeroes: ICharacter[] = null;
@@ -19,10 +19,22 @@ export class AppComponent implements OnInit{
   private availableHeroes: ICharacter[];
   private availableVillains: ICharacter[];
 
-  constructor(){}
+  constructor(
+    private modalService: NgbModal
+  ){}
 
   public ngOnInit(): void {
     this.generateAvailableLists()
+  }
+
+  openFilterModal(modal) {
+    this.modalService.open(modal, {centered: true, scrollable: true})
+      .result.then((result) => {
+        this.generateAvailableLists();
+      },
+      (reason) => {
+        this.generateAvailableLists();
+      });
   }
 
   public generateAvailableLists() {
@@ -68,6 +80,22 @@ export class AppComponent implements OnInit{
     }
 
     this.chosenHeroes[heroIndex] = newHero;
+  }
+
+  public reRollVillain() {
+    let newVillain: ICharacter = null;
+
+    while (!newVillain) {
+      const option: ICharacter = this.selectRandomCharacter(this.availableVillains);
+
+      const foundInHeroList = this.chosenHeroes.find((hero) => hero.name === option.name);
+
+      if (!foundInHeroList) {
+        newVillain = option;
+      }
+    }
+
+    this.chosenVillain = newVillain;
   }
 
   private pickHeroes() {

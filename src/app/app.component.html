@@ -1,64 +1,105 @@
-<div>
-  <h1>Random United!</h1>
-</div>
-<button type="button" (click)="generateAvailableLists()">Reroll</button>
-<div *ngIf="chosenVillain" style="margin: 10px 0;">
-  <span style="font-weight: bold">Villain:</span><br/>
-  {{ chosenVillain.name }}
-</div>
-<div *ngIf="chosenHeroes">
-  <span style="font-weight: bold">Heroes:</span>
-  <div style="display: flex; flex-wrap: wrap">
-    <div *ngFor="let hero of chosenHeroes; let index = index" style="margin: 5px; padding: 5px; border: 1px solid dimgray">
-      <div style="text-align: center">
-        Player {{index + 1}}:
-      </div>
-      <div style="text-align: center">
-        {{ hero.name }}
-      </div>
-      <div style="text-align: center">
-        <button type="button" (click)="reRollHero(index, hero)">reroll</button>
+<nav class="navbar navbar-dark bg-danger sticky-top">
+  <div class="container justify-content-center justify-content-md-start">
+    <a class="navbar-brand font-weight-bold" href="#">Random United!</a>
+  </div>
+</nav>
+<div class="container pt-3 pb-4 pb-md-0">
+  <div *ngIf="chosenVillain" class="row justify-content-center">
+    <div class="col-12 col-sm-6 col-md-5 col-lg-3">
+      <div class="card bg-dark text-white mb-3">
+        <div class="card-header text-center p-1">Villain</div>
+        <div class="card-body text-center p-2">
+          <h5 class="card-title m-0">{{ chosenVillain.name }}</h5>
+        </div>
+        <div class="card-footer d-flex justify-content-center p-1">
+          <button class="btn btn-outline-light btn-sm" (click)="reRollVillain()">Reroll</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="row mb-3" *ngIf="chosenHeroes && chosenVillain">
+    <div class="col-12 text-center">
+      <h2 class="text-danger m-0">VS.</h2>
+    </div>
+  </div>
+
+  <div *ngIf="chosenHeroes" class="row justify-content-center mb-5 mb-md-4">
+    <div class="col-12 col-sm-6 col-md-5 col-lg-3" *ngFor="let hero of chosenHeroes; let index = index">
+      <div class="card text-white mb-3" [ngClass]="{ 'bg-success': index === 0, 'bg-danger': index === 1, 'bg-warning': index === 2, 'bg-info': index === 3}">
+        <div class="card-header text-center p-1">Player {{index + 1}}</div>
+        <div class="card-body text-center p-2">
+          <h5 class="card-title m-0">{{ hero.name }}</h5>
+        </div>
+        <div class="card-footer d-flex justify-content-center p-1">
+          <button type="button" class="btn btn-outline-light btn-sm" (click)="reRollHero(index, hero)">Reroll</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center d-none d-md-flex">
+    <button type="button" class="btn btn-outline-dark btn-lg mr-3" (click)="openFilterModal(filter)">Filter</button>
+    <button type="button" class="btn btn-primary btn-lg" (click)="generateAvailableLists()">Reroll</button>
+  </div>
 </div>
 
+<div class="container-fluid justify-content-center position-fixed fixed-bottom d-flex d-md-none p-1 bg-secondary">
+  <button type="button" class="btn btn-outline-light btn-lg mr-3" (click)="openFilterModal(filter)">Filter</button>
+  <button type="button" class="btn btn-primary btn-lg" (click)="generateAvailableLists()">Reroll</button>
+</div>
 
-<div style="margin-top: 50px;">
-  Filter:
+<ng-template #filter let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let game of gameList.list" class="mb-3">
+      <span class="h5">Game:</span>
+      <div class="row">
+        <div class="col-12">
+          <div class="pl-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [id]="game.name.toLowerCase().replace(' ', '_')" [checked]="game.addAll" (change)="game.addAll = $event.target.checked" />
+              <label class="form-check-label" [for]="game.name.toLowerCase().replace(' ', '_')"><b>{{ game.name }}</b></label>
+            </div>
 
-  <div *ngFor="let game of gameList.list">
-    <div>
-      <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_')" [checked]="game.addAll" (change)="game.addAll = $event.target.checked" />
-      <label for="{{game.name.toLowerCase().replace(' ', '_')}}"><b>{{ game.name }}</b></label>
-    </div>
+            <div class="pl-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" [id]="game.name.toLowerCase().replace(' ', '_') + '_base_game'" [checked]="game.addBaseGame" (change)="game.addBaseGame = $event.target.checked" [disabled]="!game.addAll" />
+                <label class="form-check-label" [for]="game.name.toLowerCase().replace(' ', '_') + '_base_game'">Base game</label>
+              </div>
 
-    <div style="padding: 5px;">
-      <div>
-        <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_base_game'" [checked]="game.addBaseGame" (change)="game.addBaseGame = $event.target.checked" [disabled]="!game.addAll" />
-        <label for="{{game.name.toLowerCase().replace(' ', '_') + '_base_game'}}">Base game</label>
-      </div>
+              <div class="form-check" *ngIf="game.promosHeroes.length > 0 || game.promoVillains.length > 0 || game.promoAntiHeroes.length > 0">
+                <input type="checkbox" class="form-check-input" [id]="game.name.toLowerCase().replace(' ', '_') + '_promos'" [checked]="game.addPromos" (change)="game.addPromos = $event.target.checked" [disabled]="!game.addAll" />
+                <label class="form-check-label" [for]="game.name.toLowerCase().replace(' ', '_') + '_promos'">Kickstarter Promo box</label>
+              </div>
+            </div>
+          </div>
 
-      <div *ngIf="game.promosHeroes.length > 0 || game.promoVillains.length > 0 || game.promoAntiHeroes.length > 0">
-        <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_promos'" [checked]="game.addPromos" (change)="game.addPromos = $event.target.checked" [disabled]="!game.addAll" />
-        <label for="{{game.name.toLowerCase().replace(' ', '_') + '_promos'}}">Kickstarter Promos</label>
-      </div>
+          <div class="col-12">
+            <div *ngIf="game.expansions.length > 0" class="pl-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" [id]="game.name.toLowerCase().replace(' ', '_') + '_expansions'" [checked]="game.addAllExpansions" (change)="game.addAllExpansions = $event.target.checked" [disabled]="!game.addAll" />
+                <label class="form-check-label" [for]="game.name.toLowerCase().replace(' ', '_') + '_expansions'"><b>Expansions:</b></label>
+              </div>
 
-      <div style="padding-top: 5px;" *ngIf="game.expansions.length > 0">
-        <div>
-          <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_expansions'" [checked]="game.addAllExpansions" (change)="game.addAllExpansions = $event.target.checked" [disabled]="!game.addAll" />
-          <label for="{{game.name.toLowerCase().replace(' ', '_') + '_expansions'}}"><b>Expansions:</b></label>
-        </div>
-
-        <div style="padding-left: 15px;">
-          <div *ngFor="let expansion of game.expansions">
-            <input type="checkbox" [id]="expansion.name.toLowerCase().replace(' ', '_')" [checked]="expansion.addExpansion" (change)="expansion.addExpansion = $event.target.checked" [disabled]="!game.addAllExpansions || !game.addAll" />
-            <label for="{{expansion.name.toLowerCase().replace(' ', '_')}}">{{ expansion.name }}</label>
+              <div class="pl-3">
+                <div *ngFor="let expansion of game.expansions" class="form-check">
+                  <input type="checkbox" class="form-check-input" [id]="expansion.name.toLowerCase().replace(' ', '_')" [checked]="expansion.addExpansion" (change)="expansion.addExpansion = $event.target.checked" [disabled]="!game.addAllExpansions || !game.addAll" />
+                  <label class="form-check-label" [for]="expansion.name.toLowerCase().replace(' ', '_')">{{ expansion.name }}</label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('reroll')">Apply</button>
+  </div>
+</ng-template>
