@@ -512,7 +512,7 @@ export const GameList: IGameList = {
     },
     {
       gameId: 2,
-      name: 'Marvel united X-Men',
+      name: 'Marvel United X-Men',
       expansions: [],
       heroes: [
         {
