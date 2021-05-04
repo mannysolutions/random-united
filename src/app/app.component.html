@@ -8,7 +8,7 @@
 </div>
 <div *ngIf="chosenHeroes">
   <span style="font-weight: bold">Heroes:</span>
-  <div style="display: flex;">
+  <div style="display: flex; flex-wrap: wrap">
     <div *ngFor="let hero of chosenHeroes; let index = index" style="margin: 5px; padding: 5px; border: 1px solid dimgray">
       <div style="text-align: center">
         Player {{index + 1}}:
@@ -16,6 +16,49 @@
       <div style="text-align: center">
         {{ hero.name }}
       </div>
+      <div style="text-align: center">
+        <button type="button" (click)="reRollHero(index, hero)">reroll</button>
+      </div>
     </div>
   </div>
+</div>
+
+
+<div style="margin-top: 50px;">
+  Filter:
+
+  <div *ngFor="let game of gameList.list">
+    <div>
+      <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_')" [checked]="game.addAll" (change)="game.addAll = $event.target.checked" />
+      <label for="{{game.name.toLowerCase().replace(' ', '_')}}"><b>{{ game.name }}</b></label>
+    </div>
+
+    <div style="padding: 5px;">
+      <div>
+        <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_base_game'" [checked]="game.addBaseGame" (change)="game.addBaseGame = $event.target.checked" [disabled]="!game.addAll" />
+        <label for="{{game.name.toLowerCase().replace(' ', '_') + '_base_game'}}">Base game</label>
+      </div>
+
+      <div *ngIf="game.promosHeroes.length > 0 || game.promoVillains.length > 0 || game.promoAntiHeroes.length > 0">
+        <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_promos'" [checked]="game.addPromos" (change)="game.addPromos = $event.target.checked" [disabled]="!game.addAll" />
+        <label for="{{game.name.toLowerCase().replace(' ', '_') + '_promos'}}">Kickstarter Promos</label>
+      </div>
+
+      <div style="padding-top: 5px;" *ngIf="game.expansions.length > 0">
+        <div>
+          <input type="checkbox" [id]="game.name.toLowerCase().replace(' ', '_') + '_expansions'" [checked]="game.addAllExpansions" (change)="game.addAllExpansions = $event.target.checked" [disabled]="!game.addAll" />
+          <label for="{{game.name.toLowerCase().replace(' ', '_') + '_expansions'}}"><b>Expansions:</b></label>
+        </div>
+
+        <div style="padding-left: 15px;">
+          <div *ngFor="let expansion of game.expansions">
+            <input type="checkbox" [id]="expansion.name.toLowerCase().replace(' ', '_')" [checked]="expansion.addExpansion" (change)="expansion.addExpansion = $event.target.checked" [disabled]="!game.addAllExpansions || !game.addAll" />
+            <label for="{{expansion.name.toLowerCase().replace(' ', '_')}}">{{ expansion.name }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>

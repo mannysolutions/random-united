@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { gameList, ICharacter } from '../models/general.model';
+import { ICharacter } from '../models/general.model';
+import { GameList } from '../data/game.data';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { gameList, ICharacter } from '../models/general.model';
 export class AppComponent implements OnInit{
   title = 'random-united';
 
-  public gameList = gameList;
+  public gameList = GameList;
   public filter = {};
 
   public chosenVillain: ICharacter = null;
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit{
     this.availableVillains = [];
 
     this.gameList.list.forEach((game) => {
+      if (!game.addAll) {
+        return;
+      }
+
       if (game.addBaseGame) {
         this.addCharactersToLists(game.heroes, game.villains, game.antiHeroes);
       }
@@ -38,7 +43,7 @@ export class AppComponent implements OnInit{
       }
 
       game.expansions.forEach((expansion) => {
-        if (expansion.addExpansion || game.addAllExpansions) {
+        if (game.addAllExpansions && expansion.addExpansion) {
           this.addCharactersToLists(expansion.heroes, expansion.villains, expansion.antiHeroes);
         }
       });
@@ -48,7 +53,26 @@ export class AppComponent implements OnInit{
     this.pickHeroes();
   }
 
-  public pickHeroes() {
+  public reRollHero(heroIndex: number, hero: ICharacter) {
+    let newHero: ICharacter = null;
+
+    while (!newHero) {
+      const option: ICharacter = this.selectRandomCharacter(this.availableHeroes);
+
+      const heroFoundInList = this.chosenHeroes.find((hero) => hero.name === option.name);
+      const heroAlreadyTheVillain = this.chosenVillain.name === option.name;
+
+      if (!heroFoundInList && !heroAlreadyTheVillain) {
+        newHero = option;
+      }
+    }
+
+    this.chosenHeroes[heroIndex] = newHero;
+  }
+
+  private pickHeroes() {
+    this.chosenHeroes = null;
+
     if (!this.availableHeroes || this.availableHeroes.length === 0) {
       // TODO Error
       return;
@@ -57,13 +81,14 @@ export class AppComponent implements OnInit{
     const heroes: ICharacter[] = [];
 
     while (heroes.length < 4) {
-      const randomHeroIndex = Math.floor(Math.random() * (this.availableHeroes.length + 1));
+      const newHero = this.selectRandomCharacter(this.availableHeroes);
 
-      if (this.availableHeroes[randomHeroIndex]) {
-        const heroFoundInList = heroes.find((hero) => hero.name === this.availableHeroes[randomHeroIndex].name);
+      if (newHero) {
+        const heroFoundInList = heroes.find((hero) => hero.name === newHero.name);
+        const heroAlreadyTheVillain = this.chosenVillain.name === newHero.name;
 
-        if (heroes.length === 0 || !heroFoundInList) {
-          heroes.push(this.availableHeroes[randomHeroIndex]);
+        if (heroes.length === 0 || (!heroFoundInList && !heroAlreadyTheVillain)) {
+          heroes.push(newHero);
         }
       }
     }
@@ -71,19 +96,30 @@ export class AppComponent implements OnInit{
     this.chosenHeroes = heroes;
   }
 
-  public pickVillain() {
+  private selectRandomCharacter(characterList: ICharacter[]): ICharacter {
+    const randomCharacterIndex = Math.floor(Math.random() * (characterList.length));
+
+    return characterList[randomCharacterIndex];
+  }
+
+  private pickVillain() {
+    this.chosenVillain = null;
+
     if (!this.availableVillains || this.availableVillains.length === 0) {
       // TODO Error
       return;
     }
 
-    const randomVillain = Math.floor(Math.random() * (this.availableVillains.length + 1));
-
-    this.chosenVillain = this.availableVillains[randomVillain];
+    this.chosenVillain = this.selectRandomCharacter(this.availableVillains);
   }
 
-  public addCharactersToLists(heroes: ICharacter[], villains: ICharacter[], antiHeroes: ICharacter[]) {
-    this.availableHeroes.push(...heroes, ...antiHeroes);
-    this.availableVillains.push(...villains, ...antiHeroes);
+  private addCharactersToLists(heroes: ICharacter[], villains: ICharacter[], antiHeroes: ICharacter[]) {
+    // TODO check if kickstarter exclusive and should be added
+    const heroesToAdd = heroes.filter((hero) => hero.addToList);
+    const antiHeroesToAdd = antiHeroes.filter((antiHero) => antiHero.addToList);
+    const villainsToAdd = villains.filter((villain) => villain.addToList);
+
+    this.availableHeroes.push(...heroesToAdd, ...antiHeroesToAdd);
+    this.availableVillains.push(...villainsToAdd, ...antiHeroesToAdd);
   }
 }
