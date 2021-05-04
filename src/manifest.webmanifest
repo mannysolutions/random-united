@@ -1,8 +1,8 @@
 {
   "name": "Random United",
   "short_name": "Random United",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#dc3545",
+  "background_color": "#ecf0f1",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
