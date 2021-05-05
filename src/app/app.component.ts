@@ -10,8 +10,6 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'random-united';
-
   public gameList = GameList;
 
   public chosenVillain: ICharacter = null;
@@ -35,7 +33,7 @@ export class AppComponent implements OnInit{
     this.generateAvailableLists()
   }
 
-  openFilterModal(modal) {
+  public openFilterModal(modal) {
     this.modalService.open(modal, {centered: true, scrollable: true})
       .result.then((result) => {
         this.generateAvailableLists();
@@ -43,6 +41,10 @@ export class AppComponent implements OnInit{
       (reason) => {
         this.generateAvailableLists();
       });
+  }
+
+  public openAboutModal(modal) {
+    this.modalService.open(modal, {centered: true, scrollable: true});
   }
 
   public generateAvailableLists() {

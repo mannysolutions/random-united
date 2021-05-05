@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-danger sticky-top">
   <div class="container">
     <a class="navbar-brand font-weight-bold" href="#">Random United!</a>
-    <a href="mailto:dhkkuiken+random@gmail.com" class="nav-link text-white">Contact</a>
+    <button class="btn btn-outline-light" (click)="openAboutModal(about)">About</button>
   </div>
 </nav>
 <div class="container pt-3 pb-4 pb-md-0">
@@ -102,5 +102,50 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="modal.close('reroll')">Apply</button>
+  </div>
+</ng-template>
+
+<ng-template #about let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="about-title">About</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <span class="h5">About:</span>
+      <p>
+        Random United is a randomizer for the Marvel United games.
+        It can be hard to choose a hero and villain when you have so many to choose from.
+        With this randomizer you don't have to make that choice!
+      </p>
+    </div>
+    <div>
+      <span class="h5">Donate:</span>
+      <p>
+        If you want to support the creator or help with covering the server costs, you can donate some bitcoin on the address below!<br/>
+        Every satoshi helps! Thanks!
+      </p>
+      <div class="d-flex justify-content-center">
+        <img src="/assets/qrcode.jpg" width="150px"/>
+      </div>
+      <p class="font-weight-bold text-center">1MuWbMn85YRfyd67dqjfqW3yFffZwJvaPV</p>
+    </div>
+    <div>
+      <span class="h5">Contribute:</span>
+      <p>
+        If you want to contribute to the project by making some changes or add a feature you can always send me a pull request.
+        Fork the github repo and do your thing!
+        You can also use the code for other projects, but make sure to give me a shout out.
+      </p>
+    </div>
+    <div>
+      <span class="h5">Contact:</span>
+      <p>
+        You can contact me for questions, feedback and requests:<br/>
+        <a href="mailto:dhkkuiken+random@gmail.com">Mail me</a>
+      </p>
+    </div>
   </div>
 </ng-template>
