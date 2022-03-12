@@ -1102,7 +1102,12 @@ export const GameList: IGameList = {
           addToList: true
         },
         {
-          name: 'Cloak & Dagger',
+          name: 'Cloak',
+          ksExclusive: true,
+          addToList: true
+        },
+{
+          name: 'Dagger',
           ksExclusive: true,
           addToList: true
         },
