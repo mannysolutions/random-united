@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ICharacter } from '../models/general.model';
-import { GameList } from '../data/game.data';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SwUpdate } from '@angular/service-worker';
+import {Component, OnInit} from '@angular/core';
+import {SwUpdate} from '@angular/service-worker';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+import {ICharacter, IGame} from '../models/general.model';
+import {GameList} from '../data/game.data';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,12 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  public gameList = GameList;
+  public games = GameList.list;
+
+  public includeKsExclusives = true;
+
+  public filterIncludeKsExclusive: boolean;
+  public filterGameData: IGame[];
 
   public chosenVillain: ICharacter = null;
   public chosenHeroes: ICharacter[] = null;
@@ -30,28 +36,32 @@ export class AppComponent implements OnInit{
   }
 
   public ngOnInit(): void {
-    this.generateAvailableLists()
+    this.applyStorageToData();
+    this.generateAvailableLists();
   }
 
-  public openFilterModal(modal) {
+  public openFilterModal(modal): void {
+    this.filterGameData = JSON.parse(JSON.stringify(this.games));
+    this.filterIncludeKsExclusive = JSON.parse(JSON.stringify(this.includeKsExclusives));
+
     this.modalService.open(modal, {centered: true, scrollable: true})
       .result.then((result) => {
+        this.games = JSON.parse(JSON.stringify(this.filterGameData));
+        this.includeKsExclusives = JSON.parse(JSON.stringify(this.filterIncludeKsExclusive));
         this.generateAvailableLists();
-      },
-      (reason) => {
-        this.generateAvailableLists();
-      });
+        this.saveSelectionToStorage();
+      }, () => {});
   }
 
-  public openAboutModal(modal) {
+  public openAboutModal(modal): void {
     this.modalService.open(modal, {centered: true, scrollable: true});
   }
 
-  public generateAvailableLists() {
+  public generateAvailableLists(): void {
     this.availableHeroes = [];
     this.availableVillains = [];
 
-    this.gameList.list.forEach((game) => {
+    this.games.forEach((game) => {
       if (!game.addAll) {
         return;
       }
@@ -60,12 +70,12 @@ export class AppComponent implements OnInit{
         this.addCharactersToLists(game.heroes, game.villains, game.antiHeroes);
       }
 
-      if (game.addPromos) {
+      if (game.addPromos && this.includeKsExclusives) {
         this.addCharactersToLists(game.promosHeroes, game.promoVillains, game.promoAntiHeroes);
       }
 
       game.expansions.forEach((expansion) => {
-        if (game.addAllExpansions && expansion.addExpansion) {
+        if (game.addAllExpansions && expansion.addExpansion && (this.includeKsExclusives || (!this.includeKsExclusives && !expansion.ksExclusive))) {
           this.addCharactersToLists(expansion.heroes, expansion.villains, expansion.antiHeroes);
         }
       });
@@ -75,7 +85,7 @@ export class AppComponent implements OnInit{
     this.pickHeroes();
   }
 
-  public reRollHero(heroIndex: number, hero: ICharacter) {
+  public reRollHero(heroIndex: number): void {
     let newHero: ICharacter = null;
 
     while (!newHero) {
@@ -92,7 +102,7 @@ export class AppComponent implements OnInit{
     this.chosenHeroes[heroIndex] = newHero;
   }
 
-  public reRollVillain() {
+  public reRollVillain(): void {
     let newVillain: ICharacter = null;
 
     while (!newVillain) {
@@ -108,7 +118,11 @@ export class AppComponent implements OnInit{
     this.chosenVillain = newVillain;
   }
 
-  private pickHeroes() {
+  public changeIncludeKSExclusives(value: boolean): void {
+    this.filterIncludeKsExclusive = value;
+  }
+
+  private pickHeroes(): void {
     this.chosenHeroes = null;
 
     if (!this.availableHeroes || this.availableHeroes.length === 0) {
@@ -140,7 +154,7 @@ export class AppComponent implements OnInit{
     return characterList[randomCharacterIndex];
   }
 
-  private pickVillain() {
+  private pickVillain(): void {
     this.chosenVillain = null;
 
     if (!this.availableVillains || this.availableVillains.length === 0) {
@@ -151,13 +165,80 @@ export class AppComponent implements OnInit{
     this.chosenVillain = this.selectRandomCharacter(this.availableVillains);
   }
 
-  private addCharactersToLists(heroes: ICharacter[], villains: ICharacter[], antiHeroes: ICharacter[]) {
-    // TODO check if kickstarter exclusive and should be added
-    const heroesToAdd = heroes.filter((hero) => hero.addToList);
-    const antiHeroesToAdd = antiHeroes.filter((antiHero) => antiHero.addToList);
-    const villainsToAdd = villains.filter((villain) => villain.addToList);
+  private addCharactersToLists(heroes: ICharacter[], villains: ICharacter[], antiHeroes: ICharacter[]): void {
+    const heroesToAdd = heroes.filter((hero) => hero.addToList && (this.includeKsExclusives || (!this.includeKsExclusives && !hero.ksExclusive)));
+    const antiHeroesToAdd = antiHeroes.filter((antiHero) => antiHero.addToList && (this.includeKsExclusives || (!this.includeKsExclusives && !antiHero.ksExclusive)));
+    const villainsToAdd = villains.filter((villain) => villain.addToList && (this.includeKsExclusives || (!this.includeKsExclusives && !villain.ksExclusive)));
 
     this.availableHeroes.push(...heroesToAdd, ...antiHeroesToAdd);
     this.availableVillains.push(...villainsToAdd, ...antiHeroesToAdd);
+  }
+
+  private saveSelectionToStorage(): void {
+    localStorage.setItem('ksExclusives', JSON.stringify(this.includeKsExclusives));
+
+    const gameData = this.stripGameDataForStorage();
+    localStorage.setItem('games', JSON.stringify(gameData));
+  }
+
+  private applyStorageToData(): void {
+    const storageKS = localStorage.getItem('ksExclusives');
+    const storageGameData = localStorage.getItem('games');
+
+    this.includeKsExclusives = storageKS ? JSON.parse(storageKS) : true;
+
+    if (!storageGameData) {
+      this.games = GameList.list;
+      return;
+    }
+
+    const gameStorageData: IGame[] = JSON.parse(storageGameData);
+    const gameList: IGame[] = JSON.parse(JSON.stringify(GameList.list));
+
+    for (const game of gameList) {
+      const foundStGame = gameStorageData.find((storageGame) => game.gameId === storageGame.gameId);
+
+      if (!foundStGame) {
+        break;
+      }
+
+      game.addAll = foundStGame.addAll;
+      game.addAllExpansions = foundStGame.addAllExpansions;
+      game.addPromos = foundStGame.addPromos;
+      game.addBaseGame = foundStGame.addBaseGame;
+
+      for (const expansion of game.expansions) {
+        const foundStExpansion = foundStGame.expansions.find((storageExpansion) => storageExpansion.id === expansion.id);
+
+        if (!foundStExpansion) {
+          break;
+        }
+
+        expansion.addExpansion = foundStExpansion.addExpansion;
+      }
+    }
+
+    this.games = gameList;
+  }
+
+  private stripGameDataForStorage(): IGame[] {
+    const games: IGame[] = JSON.parse(JSON.stringify(this.games));
+
+    for (const game of games) {
+      game.antiHeroes = [];
+      game.heroes = [];
+      game.villains = [];
+      game.promoAntiHeroes = [];
+      game.promosHeroes = [];
+      game.promoVillains = [];
+
+      for (const expansion of game.expansions) {
+        expansion.heroes = [];
+        expansion.antiHeroes = [];
+        expansion.villains = [];
+      }
+    }
+
+    return games;
   }
 }

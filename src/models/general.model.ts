@@ -1,5 +1,4 @@
 export interface IGameList {
-  addAll: boolean;
   list: IGame[];
 }
 
@@ -7,12 +6,12 @@ export interface IGame {
   gameId: number;
   name: string;
   expansions: IExpansion[];
-  heroes: ICharacter[];
-  villains: ICharacter[];
-  antiHeroes: ICharacter[];
-  promosHeroes: ICharacter[];
-  promoVillains: ICharacter[];
-  promoAntiHeroes: ICharacter[];
+  heroes?: ICharacter[];
+  villains?: ICharacter[];
+  antiHeroes?: ICharacter[];
+  promosHeroes?: ICharacter[];
+  promoVillains?: ICharacter[];
+  promoAntiHeroes?: ICharacter[];
   addAll: boolean;
   addAllExpansions: boolean;
   addPromos: boolean;
@@ -20,11 +19,13 @@ export interface IGame {
 }
 
 export interface IExpansion {
+  id: number;
   name: string;
-  heroes: ICharacter[];
-  villains: ICharacter[];
-  antiHeroes: ICharacter[];
+  heroes?: ICharacter[];
+  villains?: ICharacter[];
+  antiHeroes?: ICharacter[];
   addExpansion: boolean;
+  ksExclusive?: boolean;
 }
 
 export interface ICharacter {

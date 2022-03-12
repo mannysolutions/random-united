@@ -1,11 +1,14 @@
 import {IGameList} from '../models/general.model';
 
 export const GameList: IGameList = {
-  addAll: true,
   list: [
     {
       gameId: 1,
       name: 'Marvel United',
+      addAll: true,
+      addAllExpansions: true,
+      addPromos: true,
+      addBaseGame: true,
       heroes: [
         {
           name: 'Captain Marvel',
@@ -68,7 +71,10 @@ export const GameList: IGameList = {
       antiHeroes: [],
       expansions: [
         {
+          id: 1,
           name: 'Infinity Gauntlet',
+          ksExclusive: true,
+          addExpansion: true,
           heroes: [],
           villains: [
             {
@@ -93,10 +99,12 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
         },
         {
+          id: 2,
           name: 'Return of the Sinister Six',
+          ksExclusive: true,
+          addExpansion: true,
           heroes: [],
           villains: [
             {
@@ -131,10 +139,13 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
         },
         {
+
+          id: 3,
           name: 'Enter the Spider-verse',
+          ksExclusive: false,
+          addExpansion: true,
           heroes: [
             {
               name: 'Spider-Man',
@@ -165,10 +176,12 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
         },
         {
+          id: 4,
           name: 'Rise of the Black Panther',
+          ksExclusive: false,
+          addExpansion: true,
           heroes: [
             {
               name: 'Black Panther',
@@ -194,10 +207,11 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
         },
         {
+          id: 5,
           name: 'Guardians of the Galaxy Remix',
+          addExpansion: true,
           heroes: [
             {
               name: 'Star-Lord',
@@ -228,10 +242,11 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
         },
         {
+          id: 6,
           name: 'Tales of Asgard',
+          addExpansion: true,
           heroes: [
             {
               name: 'Thor',
@@ -262,7 +277,36 @@ export const GameList: IGameList = {
             }
           ],
           antiHeroes: [],
-          addExpansion: true
+        },
+        {
+          id: 7,
+          name: 'Yondu',
+          ksExclusive: true,
+          addExpansion: true,
+          heroes: [
+            {
+              name: 'Yondu',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          villains: [],
+          antiHeroes: [],
+        },
+        {
+          id: 8,
+          name: 'Adam Warlock',
+          ksExclusive: true,
+          addExpansion: true,
+          heroes: [
+            {
+              name: 'Adam Warlock',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          villains: [],
+          antiHeroes: [],
         },
       ],
       promosHeroes: [
@@ -441,16 +485,6 @@ export const GameList: IGameList = {
           ksExclusive: true,
           addToList: true
         },
-        {
-          name: 'Yondu',
-          ksExclusive: true,
-          addToList: true
-        },
-        {
-          name: 'Adam Warlock',
-          ksExclusive: true,
-          addToList: true
-        }
       ],
       promoAntiHeroes: [],
       promoVillains: [
@@ -504,16 +538,352 @@ export const GameList: IGameList = {
           ksExclusive: true,
           addToList: true
         }
-      ],
-      addAll: true,
-      addAllExpansions: true,
-      addPromos: true,
-      addBaseGame: true
+      ]
     },
     {
       gameId: 2,
       name: 'Marvel United X-Men',
-      expansions: [],
+      addAll: true,
+      addAllExpansions: true,
+      addPromos: true,
+      addBaseGame: true,
+      expansions: [
+        {
+          id: 9,
+          name: 'The Horsemen of Apocalypse',
+          ksExclusive: true,
+          heroes: [],
+          antiHeroes: [
+            {
+              name: 'Apocalypse',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Famine',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'War',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Death',
+              ksExclusive: false,
+              addToList: true
+            }
+          ],
+          addExpansion: true
+        },
+        {
+          id: 10,
+          name: 'Days of Future past',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Logan',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Nimrod',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Sentinels',
+              ksExclusive: false,
+              addToList: true
+            }
+          ],
+          addExpansion: true
+        },
+        {
+          id: 11,
+          name: 'Fantastic Four',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'The Thing',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Mister Fantastic',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Invisible Woman',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Human Torch',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Silver Surfer',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          antiHeroes: [
+            {
+              name: 'Doctor Doom',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Super-Skrull',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 12,
+          name: 'Deadpool',
+          ksExclusive: false,
+          heroes: [
+            {
+              name: 'Deadpool',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Lady Deadpool',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [
+            {
+              name: 'Bob, Agent of Hydra',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Deadpool',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 13,
+          name: 'Blue Team',
+          ksExclusive: false,
+          heroes: [
+            {
+              name: 'Jubilee',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Gambit',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Rogue',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Psylocke',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Banshee',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Mister Sinister',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 14,
+          name: 'Gold Team',
+          ksExclusive: false,
+          heroes: [
+            {
+              name: 'Archangel',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Colossus',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Iceman',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Bishop',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Forge',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Sebastian Shaw',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 15,
+          name: 'First Class',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Cyclops (FC)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Angel (FC)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Marvel Girl',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Iceman (FC)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Beast',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Scarlet Witch',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Quicksilver',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 16,
+          name: 'Phoenix Five',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Hope Summers',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Cyclops (PF)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Namor (PF)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Magik (PF',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Colossus (PF)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Emma Frost (PF)',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 17,
+          name: 'Storm (Mohawk)',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Storm (Mohawk)',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [],
+          addExpansion: true
+        },
+        {
+          id: 18,
+          name: 'Old Man Logan',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Old Man Logan',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [],
+          addExpansion: true
+        },
+      ],
       heroes: [
         {
           name: 'Wolverine',
@@ -556,7 +926,7 @@ export const GameList: IGameList = {
           name: 'Juggernaut',
           ksExclusive: false,
           addToList: true
-        }
+        },
       ],
       antiHeroes: [
         {
@@ -570,13 +940,287 @@ export const GameList: IGameList = {
           addToList: true
         }
       ],
-      promosHeroes: [],
-      promoVillains: [],
-      promoAntiHeroes: [],
-      addAll: false,
-      addAllExpansions: false,
-      addPromos: false,
-      addBaseGame: false,
+      promosHeroes: [
+        {
+          name: 'Feral',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Polaris',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Strong Guy',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Boom Boom',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Longshot',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Dazzler',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Sunspot',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Magik',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Firestar',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Warpath',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Phoenix',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Sunfire',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Wolfsbane',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Blink',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Havok',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Fantomex',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Captain Britain',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Multiple Man',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Weapon X',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Pixie',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Doop',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'X-23',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Mirage',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Warlock',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Kitty Pryde',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'GwenPool',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Guardian',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Puck',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Northstar',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Snowbird',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Sasquatch',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Nightcrawler',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Cloak & Dagger',
+          ksExclusive: true,
+          addToList: true
+        },
+      ],
+      promoVillains: [
+        {
+          name: 'Pyro',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Blob',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Toad',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Shasow King',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Callisto',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Deathbird',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Arcade',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Lady Deathstrike',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Sauron',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Silver Samurai',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Omega Red',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Brood Queen',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Mojo',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Dark Phoenix',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Onslaught',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Avalanche',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Mastermind',
+          ksExclusive: true,
+          addToList: true
+        },
+      ],
+      promoAntiHeroes: [
+        {
+          name: 'Legion',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Emma Frost',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Namor',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Spiral',
+          ksExclusive: true,
+          addToList: true
+        },
+        {
+          name: 'Marrow',
+          ksExclusive: true,
+          addToList: true
+        },
+      ]
     }
   ]
 };
