@@ -855,6 +855,42 @@ export const GameList: IGameList = {
         },
         {
           id: 17,
+          name: 'X-Force',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Cannonball',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Domino',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Shatterstar',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Cable',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Stryfe',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          addExpansion: true
+        },
+        {
+          id: 18,
           name: 'Storm (Mohawk)',
           ksExclusive: true,
           heroes: [
@@ -869,7 +905,7 @@ export const GameList: IGameList = {
           addExpansion: true
         },
         {
-          id: 18,
+          id: 19,
           name: 'Old Man Logan',
           ksExclusive: true,
           heroes: [
