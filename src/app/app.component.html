@@ -11,6 +11,8 @@
         <div class="card-header text-center p-1">Villain</div>
         <div class="card-body text-center p-2">
           <h5 class="card-title m-0">{{ chosenVillain.name }}</h5>
+          <h6 *ngIf="chosenVillain.subtitle" class="mb-0">{{ chosenVillain.subtitle }}</h6>
+          <h6 *ngIf="!chosenVillain.subtitle" class="mb-0">&nbsp;</h6>
         </div>
         <div class="card-footer d-flex justify-content-center p-1">
           <button class="btn btn-outline-light btn-sm" (click)="reRollVillain()">Reroll</button>
@@ -31,6 +33,8 @@
         <div class="card-header text-center p-1">Player {{index + 1}}</div>
         <div class="card-body text-center p-2">
           <h5 class="card-title m-0">{{ hero.name }}</h5>
+          <h6 *ngIf="hero.subtitle" class="mb-0">{{ hero.subtitle }}</h6>
+          <h6 *ngIf="!hero.subtitle" class="mb-0">&nbsp;</h6>
         </div>
         <div class="card-footer d-flex justify-content-center p-1">
           <button type="button" class="btn btn-outline-light btn-sm" (click)="reRollHero(index)">Reroll</button>
@@ -83,7 +87,7 @@
               </div>
 
               <!-- Promo Box -->
-              <div class="form-check" *ngIf="game.promosHeroes.length > 0 || game.promoVillains.length > 0 || game.promoAntiHeroes.length > 0">
+              <div class="form-check" *ngIf="game.promoHeroes.length > 0 || game.promoVillains.length > 0 || game.promoAntiHeroes.length > 0">
                 <input type="checkbox" class="form-check-input" [id]="game.name.toLowerCase().replace(' ', '_') + '_promos'" [checked]="game.addPromos" (change)="game.addPromos = $event.target.checked" [disabled]="!game.addAll || !filterIncludeKsExclusive" />
                 <label class="form-check-label" [for]="game.name.toLowerCase().replace(' ', '_') + '_promos'">Kickstarter Promo box</label>
               </div>

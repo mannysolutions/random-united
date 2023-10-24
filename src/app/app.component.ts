@@ -71,7 +71,7 @@ export class AppComponent implements OnInit{
       }
 
       if (game.addPromos && this.includeKsExclusives) {
-        this.addCharactersToLists(game.promosHeroes, game.promoVillains, game.promoAntiHeroes);
+        this.addCharactersToLists(game.promoHeroes, game.promoVillains, game.promoAntiHeroes);
       }
 
       game.expansions.forEach((expansion) => {
@@ -229,7 +229,7 @@ export class AppComponent implements OnInit{
       game.heroes = [];
       game.villains = [];
       game.promoAntiHeroes = [];
-      game.promosHeroes = [];
+      game.promoHeroes = [];
       game.promoVillains = [];
 
       for (const expansion of game.expansions) {

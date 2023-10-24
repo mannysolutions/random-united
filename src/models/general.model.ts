@@ -9,7 +9,7 @@ export interface IGame {
   heroes?: ICharacter[];
   villains?: ICharacter[];
   antiHeroes?: ICharacter[];
-  promosHeroes?: ICharacter[];
+  promoHeroes?: ICharacter[];
   promoVillains?: ICharacter[];
   promoAntiHeroes?: ICharacter[];
   addAll: boolean;
@@ -30,6 +30,7 @@ export interface IExpansion {
 
 export interface ICharacter {
   name: string;
+  subtitle?: string;
   ksExclusive: boolean;
   addToList: boolean;
 }
