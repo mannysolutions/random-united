@@ -1279,7 +1279,401 @@ export const GameList: IGameList = {
       addAllExpansions: false,
       addPromos: false,
       addBaseGame: false,
-      expansions: [],
+      expansions: [
+        {
+          id: 20,
+          name: 'The coming of Galactus',
+          ksExclusive: true,
+          heroes: [],
+          antiHeroes: [
+            {
+              name: 'Nova',
+              subtitle: '(Frankie Raye)',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Galactus',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Air-Walker',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Firelord',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Terrax',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          addExpansion: true
+        },
+        {
+          id: 21,
+          name: 'War of Kings',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Black Bolt',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Medusa',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Crystal',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Lockjaw',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Gorgon',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Triton',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Karnak',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [
+            {
+              name: 'Gladiator',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Vulcan',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          addExpansion: true
+        },
+        {
+          id: 22,
+          name: 'The Age of Apocalypse',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'X-Man',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Magneto',
+              subtitle: '{Age of Apocalypse)',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Morph',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Sabretooth & Wildchild',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Apocalypse',
+              subtitle: '{Age of Apocalypse)',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Dark Beast',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Nemesis',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 23,
+          name: 'Civil War',
+          ksExclusive: false,
+          heroes: [
+            {
+              name: 'Wonder Man',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Spectrum',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Captain America',
+              subtitle: '(Classic/Civil War)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Iron Man',
+              subtitle: '(Civil War)',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Tigra',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Goliath',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Kate Bishop',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Yellowjacket',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Hulkling',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Iron Spider',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [],
+          addExpansion: true
+        },
+        {
+          id: 24,
+          name: 'Secret Invasion',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Ronin',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Nick Fury, Sr.',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Maria Hill',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Quake',
+              ksExclusive: true,
+              addToList: true
+            }
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Queen Veranke',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Skrulls (1-4)',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 25,
+          name: 'Annihilation',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Nova Prime',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Phyla-Vell',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Quasar',
+              ksExclusive: true,
+              addToList: true
+            },
+            {
+              name: 'Moondragon',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Annihilus',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 26,
+          name: 'Maximum Carnage',
+          ksExclusive: false,
+          heroes: [],
+          antiHeroes: [
+            {
+              name: 'Morbius',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          villains: [
+            {
+              name: 'Demogoblin',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Scorpion',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Scream',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Shriek',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Doppelganger',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+        {
+          id: 27,
+          name: 'World War Hulk',
+          ksExclusive: false,
+          heroes: [
+            {
+              name: 'Hulkbuster Iron Man',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Hercules',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Doc Samson',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [
+            {
+              name: 'Ares',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Gladiator Hulk',
+              ksExclusive: false,
+              addToList: true
+            },
+            {
+              name: 'Sentry',
+              ksExclusive: false,
+              addToList: true
+            },
+          ],
+          villains: [],
+          addExpansion: true
+        },
+        {
+          id: 28,
+          name: 'Iron Lad',
+          ksExclusive: true,
+          heroes: [
+            {
+              name: 'Iron Lad',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          antiHeroes: [],
+          villains: [],
+          addExpansion: true
+        },
+        {
+          id: 29,
+          name: 'Fing Fang Foom',
+          ksExclusive: true,
+          heroes: [],
+          antiHeroes: [],
+          villains: [
+            {
+              name: 'Fing Fang Foom',
+              ksExclusive: true,
+              addToList: true
+            },
+          ],
+          addExpansion: true
+        },
+      ],
       heroes: [
         {
           name: 'Captain Carter',
