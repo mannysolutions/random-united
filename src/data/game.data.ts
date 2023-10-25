@@ -1,4 +1,4 @@
-import {IGameList} from '../models/general.model';
+import {ICharacter, IExpansion, IGameList} from '../models/general.model';
 
 export const GameList: IGameList = {
   list: [
@@ -1678,56 +1678,56 @@ export const GameList: IGameList = {
         {
           name: 'Captain Carter',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Loki',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Shuri Black Panther',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Spider-man 2099',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Mighty Thor',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Ironheart',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         }
       ],
       villains: [
         {
           name: 'Immortus',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Maestro',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
         {
           name: 'Emperor Doom',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
       ],
       antiHeroes: [
         {
           name: 'Cosmic Ghost Rider',
           ksExclusive: false,
-          addToList: false
+          addToList: true
         },
       ],
       promoHeroes: [
@@ -2055,6 +2055,71 @@ export const GameList: IGameList = {
           addToList: true
         }
       ],
+    },
+    {
+      gameId: 4,
+      name: 'Spider-Geddon',
+      expansions: [],
+      heroes: [
+        {
+          name: 'Symbiote Spider-Man',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Scarlet Spider',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Silk',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Spider-Man Noir',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Peni Parker',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Spider-Punk',
+          ksExclusive: false,
+          addToList: true
+        },
+      ],
+      villains: [
+        {
+          name: 'Morlun',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Spot',
+          ksExclusive: false,
+          addToList: true
+        },
+      ],
+      antiHeroes: [
+        {
+          name: 'Anti-Venom',
+          ksExclusive: false,
+          addToList: true
+        },
+        {
+          name: 'Superior Spider-Man',
+          ksExclusive: false,
+          addToList: true
+        },
+      ],
+      addAll: false,
+      addAllExpansions: false,
+      addPromos: false,
+      addBaseGame: false,
     }
   ]
 };
