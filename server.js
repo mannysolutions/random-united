@@ -22,9 +22,9 @@ app.use(
           "'unsafe-eval'",
           "*.cloudflare.com"
         ],
-        styleSrc: ["'self'", 'fonts.googleapis.com', "'unsafe-inline'"],
+        styleSrc: ["'self'", 'fonts.googleapis.com', "'unsafe-inline'", "'unsafe-hashes'"],
         //imgSrc: ["'self'", 'https://*.com'],
-        scriptSrcAttr: ["'unsafe-inline'"],
+        scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"],
         imgSrc: ["'self'"],
         fontSrc: ["'self'", 'https://*.com', 'data:']
       },
