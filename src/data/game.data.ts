@@ -2059,6 +2059,10 @@ export const GameList: IGameList = {
     {
       gameId: 4,
       name: 'Spider-Geddon',
+      addAll: false,
+      addAllExpansions: false,
+      addPromos: false,
+      addBaseGame: false,
       expansions: [],
       heroes: [
         {
@@ -2116,10 +2120,9 @@ export const GameList: IGameList = {
           addToList: true
         },
       ],
-      addAll: false,
-      addAllExpansions: false,
-      addPromos: false,
-      addBaseGame: false,
+      promoHeroes: [],
+      promoVillains: [],
+      promoAntiHeroes: [],
     }
   ]
 };
