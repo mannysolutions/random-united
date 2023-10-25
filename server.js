@@ -7,7 +7,30 @@ const port = (process.env.PORT || process.env.VCAP_APP_PORT || 8080);
 
 app.enable('trust proxy');
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [
+          "'self'",
+          "'unsafe-inline'",
+        ],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-hashes'",
+          "'unsafe-eval'",
+          "*.cloudflare.com"
+        ],
+        styleSrc: ["'self'", 'fonts.googleapis.com', "'unsafe-inline'"],
+        //imgSrc: ["'self'", 'https://*.com'],
+        scriptSrcAttr: ["'unsafe-inline'"],
+        imgSrc: ["'self'"],
+        fontSrc: ["'self'", 'https://*.com', 'data:']
+      },
+    }
+  })
+);
 app.use(express.static(__dirname + '/dist/random-united'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
