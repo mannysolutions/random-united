@@ -2062,7 +2062,7 @@ export const GameList: IGameList = {
       addAll: false,
       addAllExpansions: false,
       addPromos: false,
-      addBaseGame: false,
+      addBaseGame: true,
       expansions: [],
       heroes: [
         {
