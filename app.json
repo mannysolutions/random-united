@@ -1,0 +1,26 @@
+{
+  "name": "Random United",
+  "repository": "https://github.com/mannysolutions/random-united",
+  "scripts": {},
+  "env": {},
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "image": "heroku/nodejs",
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    }
+  ],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "bundle exec rake test"
+      }
+    }
+  }
+}
